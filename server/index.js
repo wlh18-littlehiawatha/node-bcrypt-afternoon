@@ -3,6 +3,8 @@ const massive = require('massive');
 const session = require('express-session');
 require('dotenv').config();
 
+const authCtrl = require ('./controllers/authController')
+
 const {CONNECTION_STRING, SESSION_SECRET} = process.env
 
 
@@ -33,6 +35,12 @@ massive ({
    console.log('DB Connected!')
    app.listen(PORT, console.log(`Server running on port ${PORT}! Authenticate?`))
 }).catch((error) => console.log(error, `Error with Massive connection`) )
+
+
+
+// ENDPOINTS 
+
+app.post('/auth/register', authCtrl.register)
 
 
 
