@@ -3,6 +3,7 @@ const massive = require('massive');
 const session = require('express-session');
 require('dotenv').config();
 
+const treasureCtrl = require('./controllers/treasureController')
 const authCtrl = require ('./controllers/authController')
 
 const {CONNECTION_STRING, SESSION_SECRET} = process.env
@@ -11,7 +12,7 @@ const {CONNECTION_STRING, SESSION_SECRET} = process.env
 const app = express();
 
 
-const PORT = 4000
+const PORT = 8987
 
 //top level middleware
 app.use(express.json());
@@ -42,6 +43,9 @@ massive ({
 
 app.post('/auth/register', authCtrl.register);
 app.post('/auth/login', authCtrl.login);
+
+app.get('/auth/logout', authCtrl.logout);
+app.get('/api/treasure/dragon', treasureCtrl.dragonTreasure)
 
 
 
